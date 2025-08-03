@@ -10,7 +10,7 @@ const MyPublishedSessions = () => {
 
   const fetchPublishedSessions = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/v1/sessions", {
+      const res = await axios.get("https://wellnessflow-backend.onrender.com/api/v1/sessions", {
         withCredentials: true,
       });
       setSessions(res.data.sessions || []);
@@ -27,7 +27,7 @@ const MyPublishedSessions = () => {
 
 const handleUnpublish = async () => {
   try {
-    await axios.patch(`http://localhost:4000/api/v1/${session._id}/unpublish`, {}, {
+    await axios.patch(`https://wellnessflow-backend.onrender.com/api/v1/${session._id}/unpublish`, {}, {
       withCredentials: true,
     });
     toast.success("Session moved to drafts!");

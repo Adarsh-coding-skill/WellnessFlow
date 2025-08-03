@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/v1/sessions", { withCredentials: true })
+      .get("https://wellnessflow-backend.onrender.com/api/v1/sessions", { withCredentials: true })
       .then((res) => setSessions(res.data.sessions))
       .catch((err) => console.error("Error fetching sessions:", err));
   }, []);

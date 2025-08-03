@@ -14,7 +14,7 @@ const SessionCard = ({ session, refresh }) => {
   const handlePublish = async () => {
     try {
       await axios.patch(
-        `http://localhost:4000/api/v1/${session._id}/publish`,
+        `https://wellnessflow-backend.onrender.com/api/v1/${session._id}/publish`,
         {},
         { withCredentials: true }
       );
@@ -28,7 +28,7 @@ const SessionCard = ({ session, refresh }) => {
   const handleUnpublish = async () => {
   try {
     await axios.patch(
-      `http://localhost:4000/api/v1/${session._id}/unpublish`,
+      `https://wellnessflow-backend.onrender.com/api/v1/${session._id}/unpublish`,
       {},
       { withCredentials: true }
     );

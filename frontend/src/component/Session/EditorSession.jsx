@@ -17,7 +17,7 @@ const Editor = () => {
     if (!id) return;
 
     axios
-      .get(`http://localhost:4000/api/v1/${id}`, { withCredentials: true })
+      .get(`https://wellnessflow-backend.onrender.com/api/v1/${id}`, { withCredentials: true })
       .then((res) => {
         const session = res.data.session;
         setTitle(session.title || "");
@@ -37,7 +37,7 @@ const Editor = () => {
 
     axios
       .post(
-        "http://localhost:4000/api/v1/save-draft",
+        "https://wellnessflow-backend.onrender.com/api/v1/save-draft",
         {
           id,
           title,
@@ -64,7 +64,7 @@ const Editor = () => {
   const handlePublish = async () => {
     try {
       await axios.post(
-        "http://localhost:4000/api/v1/publish",
+        "https://wellnessflow-backend.onrender.com/api/v1/publish",
         {
           id,
           title,

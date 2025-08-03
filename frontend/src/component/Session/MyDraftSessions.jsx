@@ -10,7 +10,7 @@ const Draft = () => {
 
   const fetchDrafts = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/v1/me", {
+      const res = await axios.get("https://wellnessflow-backend.onrender.com/api/v1/me", {
         withCredentials: true,
       });
       const drafts = res.data.sessions.filter((s) => s.status === "draft");

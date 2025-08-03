@@ -26,7 +26,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/v1/user/logout", {
+      const res = await axios.get("https://wellnessflow-backend.onrender.com/api/v1/user/logout", {
         withCredentials: true,
       });
       toast.success(res.data.message);
