@@ -4,13 +4,12 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../Context/UserContext";
-import Dashboard from "../Home/Dashboard";
+
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 
 import "../../CSS/auth.css"
-  import '../../App.css';
+
 
 const Register = () => {
   const navigate = useNavigate();
