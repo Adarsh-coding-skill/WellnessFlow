@@ -8,7 +8,7 @@ const sessionRouters = require('./routers/sessionRouters')
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://wellnessflow-frontend.onrender.com",
     methods: ["GET", "POST", "DELETE", "PUT","PATCH"],
     credentials: true
 }))
