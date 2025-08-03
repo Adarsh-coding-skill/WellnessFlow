@@ -15,8 +15,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/v1/sessions", 
-        { withCredentials: true })
+      .get("http://localhost:4000/api/v1/sessions", { withCredentials: true })
       .then((res) => setSessions(res.data.sessions))
       .catch((err) => console.error("Error fetching sessions:", err));
   }, []);
@@ -26,7 +25,7 @@ const Dashboard = () => {
 
   return (
     <Box p={4}>
-      {/* Welcome Header */}
+
       <Box display="flex" alignItems="center" justifyContent="space-between" mb={4}>
         <Box display="flex" alignItems="center">
           <Avatar sx={{ bgcolor: "#1976d2", mr: 2 }}>A</Avatar>
@@ -44,15 +43,17 @@ const Dashboard = () => {
           New Session
         </Button>
       </Box>
-
-      {/* Draft Sessions */}
       <Typography variant="h6" gutterBottom>📝 Drafts</Typography>
-      <Grid container spacing={3} mb={5}>
+      <Grid container spacing={3} columns={12} mb={5}>
         {drafts.length === 0 ? (
           <Typography variant="body2" color="text.secondary" ml={2}>No draft sessions found.</Typography>
         ) : (
           drafts.map((session) => (
-            <Grid item xs={12} sm={6} md={4} key={session._id}>
+            <Grid
+              item
+              key={session._id}
+              gridColumn={{ xs: 'span 12', sm: 'span 6', md: 'span 4' }}
+            >
               <Card elevation={3}>
                 <CardContent>
                   <Typography variant="h6" fontWeight="bold" gutterBottom>
@@ -83,14 +84,17 @@ const Dashboard = () => {
         )}
       </Grid>
 
-      {/* Published Sessions */}
-      <Typography variant="h6" gutterBottom>✅ Published Sessions</Typography>
-      <Grid container spacing={3}>
+      <Typography variant="h6" gutterBottom>Published Sessions</Typography>
+      <Grid container spacing={3} columns={12}>
         {published.length === 0 ? (
           <Typography variant="body2" color="text.secondary" ml={2}>No published sessions yet.</Typography>
         ) : (
           published.map((session) => (
-            <Grid item xs={12} sm={6} md={4} key={session._id}>
+            <Grid
+              item
+              key={session._id}
+              gridColumn={{ xs: 'span 12', sm: 'span 6', md: 'span 4' }}
+            >
               <Card elevation={3}>
                 <CardContent>
                   <Typography variant="h6" fontWeight="bold" gutterBottom>

@@ -27,7 +27,7 @@ const register = async (req, res) => {
       .status(201)
       .json({ message: "User registered successfully" });
   } catch (err) {
-    console.error("Signup error:", err);
+  
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
@@ -36,9 +36,6 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log(" Email:", email);
-    console.log(" Password:", password);
-
     if (!email || !password) {
       return res.status(400).json({ message: "Please provide email and password" });
     }
@@ -46,7 +43,7 @@ const login = async (req, res) => {
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      console.log("❌ No user found with this email");
+     
       return res.status(401).json({ message: "Invalid Email or Password" });
     }
 
@@ -65,7 +62,7 @@ const login = async (req, res) => {
       .status(200)
       .json({ message: "Login successful", user: { id: user._id, name: user.name } });
   } catch (err) {
-    console.error("Login error:", err);
+
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
@@ -73,7 +70,12 @@ const login = async (req, res) => {
 
 
 const logout = (req, res) => {
-  res.clearCookie("token").json({ message: "Logged out" });
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: "Lax", 
+    secure: false,   
+  });
+  res.status(200).json({ message: "Logged out" });
 };
 
 const getProfile = async (req, res) => {

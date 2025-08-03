@@ -6,18 +6,19 @@ const {
   getSessionById,
   saveDraft,
   publishSession,
-  unpublishSession
+  unpublishSession,
 } = require("../controller/sessController.js");
 
 const router = express.Router();
 
 router.get("/sessions", getPublicSessions);
-router.use(protect);
-router.post("/save-draft", protect, saveDraft);
-router.post("/publish", protect, publishSession);
-router.get("/me", protect, getMySessions);
-router.get("/public", getPublicSessions);
-router.get("/:id", protect, getSessionById);
-router.patch("/:id/unpublish",protect, unpublishSession);
+router.get("/public", getPublicSessions);  
+
+router.use(protect); 
+router.get("/me", getMySessions);
+router.post("/save-draft", saveDraft);
+router.post("/publish",protect, publishSession);
+router.patch("/:id/unpublish", unpublishSession);
+router.get("/:id", getSessionById); 
 
 module.exports = router;

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, data } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import debounce from "lodash.debounce";
+import "../../CSS/session.css";
 
 const Editor = () => {
   const { id } = useParams();
@@ -19,76 +20,101 @@ const Editor = () => {
       .get(`http://localhost:4000/api/v1/${id}`, { withCredentials: true })
       .then((res) => {
         const session = res.data.session;
-        setTitle(session.title);
-        setTags(session.tags.join(", "));
-        setJsonFileUrl(session.json_file_url);
+        setTitle(session.title || "");
+        setTags((session.tags || []).join(", "));
+        setJsonFileUrl(session.json_file_url || "");
+      })
+      .catch((err) => {
+        console.error("Failed to load session:", err.response?.data || err.message);
+        alert("Failed to load session.");
       });
   }, [id]);
 
   const autoSave = debounce(() => {
+    if (!title.trim()) return;
+
     setSaving(true);
+
     axios
       .post(
         "http://localhost:4000/api/v1/save-draft",
-        { id, title, tags: tags.split(",").map(t => t.trim()), json_file_url: jsonFileUrl },
+        {
+          id,
+          title,
+          tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
+          json_file_url: jsonFileUrl,
+        },
         { withCredentials: true }
       )
       .then((res) => {
         if (!id) navigate(`/editor/${res.data.session._id}`);
       })
+      .catch((err) => {
+        console.error("Auto-save error:", err.response?.data || err.message);
+      })
       .finally(() => setSaving(false));
   }, 5000);
-
 
   useEffect(() => {
     if (title || tags || jsonFileUrl) autoSave();
     return () => autoSave.cancel();
   }, [title, tags, jsonFileUrl]);
 
+  // 🚀 Publish session
   const handlePublish = async () => {
-    await axios.post("http://localhost:4000/api/v1/publish", {
-      id,
-      title,
-      tags: tags.split(",").map(t => t.trim()),
-      json_file_url: jsonFileUrl || ""
-    }, {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      await axios.post(
+        "http://localhost:4000/api/v1/publish",
+        {
+          id,
+          title,
+          tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
+          json_file_url: jsonFileUrl || "",
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    navigate("/my-sessions");
+      alert("✅ Session published successfully!");
+      navigate("/my-sessions");
+    } catch (err) {
+      console.error("❌ Publish failed:", err.response?.data || err.message);
+      alert("Failed to publish session.");
+    }
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
-      <h2 className="text-xl font-bold mb-4">{id ? "Edit" : "New"} Session</h2>
+    <div className="editor-container">
+      <h2 className="editor-title">{id ? "Edit" : "New"} Session</h2>
 
       <input
-        className="w-full border p-2 mb-2 rounded"
+        className="editor-input"
         placeholder="Session Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
-        className="w-full border p-2 mb-2 rounded"
+        className="editor-input"
         placeholder="Tags (comma separated)"
         value={tags}
         onChange={(e) => setTags(e.target.value)}
       />
       <input
-        className="w-full border p-2 mb-4 rounded"
+        className="editor-input"
         placeholder="JSON File URL"
         value={jsonFileUrl}
         onChange={(e) => setJsonFileUrl(e.target.value)}
       />
 
-      <div className="flex justify-between">
-        <button className="bg-green-600 text-white px-4 py-2 rounded" onClick={handlePublish}>
+      <div className="editor-footer">
+        <button className="editor-button" onClick={handlePublish}>
           Publish
         </button>
-        {saving && <span className="text-gray-500">Auto-saving...</span>}
+        {saving && <span className="editor-saving-text">Auto-saving...</span>}
       </div>
     </div>
   );
