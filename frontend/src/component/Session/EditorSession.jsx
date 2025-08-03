@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import debounce from "lodash.debounce";
-import "../../CSS/session.css";
-  import '../../App.css';
+import "../../CSS/Session.css";
+
 const Editor = () => {
   const { id } = useParams();
   const navigate = useNavigate();
