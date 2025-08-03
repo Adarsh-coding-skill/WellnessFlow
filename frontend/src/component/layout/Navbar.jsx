@@ -74,7 +74,7 @@ const Navbar = () => {
                   sx={{
                     color: "#fff",
                     fontWeight: 500,
-                    "&:hover": { color: "#f72585" },
+                    "&:hover": { color: "#65f0ffa4" },
                   }}
                 >
                   {item.text}
