@@ -20,7 +20,7 @@ A secure wellness session platform where users can create, save drafts, and publ
 
 ## Quick Start
 
-### Backend
+### Frontend 
 
 ```bash
 cd server
