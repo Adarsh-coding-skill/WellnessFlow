@@ -1,0 +1,121 @@
+
+.navbarShow {
+  background: #0f0c29;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbarHide {
+  display: none;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+img.logo {
+   background-color: transparent;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.menu li {
+  list-style: none;
+}
+
+.menu a {
+  color: #ffffffcc;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #fff;
+}
+
+.menu a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background: #ff6ec4;
+  transition: 0.3s ease;
+}
+
+.menu a:hover::after {
+  width: 100%;
+}
+
+button {
+  background: #ff6ec4;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 0.4rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #f72585;
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px #ff6ec4aa;
+}
+
+.hamburger {
+  display: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Responsive */
+
+@media screen and (max-width: 768px) {
+  .menu {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: #1a1a2e;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: none;
+  }
+
+  .show-menu {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .menu li,
+  .menu button {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+
+  .menu a {
+    font-size: 1rem;
+  }
+}

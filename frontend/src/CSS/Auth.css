@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: "Roboto", sans-serif;
+}
+
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(ellipse at center, #120117 0%, #0A0A0A 100%);
+  color: #65f0ff;
+}
+.Box-container{
+    width: 350px;
+  height: 350px;
+  display: flex;
+  margin-left: 37%;
+  margin-top: 50px;
+  background-color: rgba(17, 16, 16, 0.401);
+}
+
+.Box-container {
+  width: 425px;
+  height: 425px;
+  display: flex;
+  background-color: #0A0A0A;
+  background: radial-gradient(ellipse at center, #1f0036 0%, #0A0A0A 100%);
+  color: #C165FF;
+  border-radius: 25px;
+  border: 1px solid #C165FF;
+  flex-direction: column;
+  align-content: space-around;
+
+  z-index: 1;
+ 
+  align-items: stretch;
+}
+
+.Box-container:hover{
+    box-shadow: 0 0 15px #C165FF;
+    transition: all 0.4s ease;
+}
+
+h2 {
+    padding: 10px;
+    margin: 15px;
+}
+.login-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 250px;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+
+.Text-input {
+    width: 85%;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #111;
+    color: #dbd9dd;
+   
+    
+    outline: none;
+   
+}
+.Text-input label{
+    color: #C165FF;
+}
+.Text-input:hover{
+    box-shadow: 0 0 5px #C165FF;
+     transition: all 0.3s ease;
+}
+.button-signup {
+  background: linear-gradient(145deg, #1f0036, #0A0A0A);
+  color: #C165FF;
+  border: 1px solid #C165FF;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 15%;
+  box-shadow: 0 0 10px rgba(193, 101, 255, 0.3);
+}
+
+.button-signup:hover {
+  background: #C165FF;
+  color: #0A0A0A;
+  box-shadow: 0 0 15px #C165FF;
+  transform: translateY(-2px);
+}
+
+.redirect-Link{
+    margin-top: 25px;
+}
