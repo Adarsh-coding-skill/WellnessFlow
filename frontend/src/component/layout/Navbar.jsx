@@ -51,7 +51,7 @@ const Navbar = () => {
       position="static"
       sx={{
         bgcolor: "#11101d",
-        boxShadow: "0 4px 12px rgba(255, 0, 150, 0.4)",
+        boxShadow: "0 4px 12px #65f0ff",
       }}
     >
  
@@ -64,7 +64,7 @@ const Navbar = () => {
 
         {isAuthorized && (
           <>
-            {/* Desktop View */}
+          
             <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
               {menuItems.map((item, index) => (
                 <Button
@@ -91,7 +91,7 @@ const Navbar = () => {
               </Button>
             </Box>
 
-            {/* Mobile Menu Button */}
+         
             <IconButton
               edge="end"
               sx={{ display: { md: "none" }, color: "#fff" }}
@@ -103,7 +103,7 @@ const Navbar = () => {
         )}
       </Toolbar>
 
-      {/* Drawer Menu */}
+    
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
         <Box
           sx={{ width: 250, bgcolor: "#1e1e2f", height: "100%", color: "#fff" }}
