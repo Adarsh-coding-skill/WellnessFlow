@@ -7,8 +7,7 @@ import { Context } from "../Context/UserContext";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-
-import "../../CSS/auth.css"
+import "../../CSS/Auth.css"
 
 
 const Register = () => {
