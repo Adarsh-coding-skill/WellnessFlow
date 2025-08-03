@@ -58,7 +58,7 @@ const login = async (req, res) => {
 
     const token = createToken(user._id);
     res
-      .cookie("token", token, { httpOnly: true,secure: true, sameSite: "Lax" })
+      .cookie("token", token, { httpOnly: true,secure: true, sameSite: "none" })
       .status(200)
       .json({ message: "Login successful", user: { id: user._id, name: user.name } });
   } catch (err) {
@@ -72,7 +72,7 @@ const login = async (req, res) => {
 const logout = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    sameSite: "Lax", 
+    sameSite: "none", 
     secure: true,   
   });
   res.status(200).json({ message: "Logged out" });
