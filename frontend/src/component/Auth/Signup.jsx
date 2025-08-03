@@ -10,7 +10,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 import "../../CSS/auth.css"
-
+  import '../../App.css';
 
 const Register = () => {
   const navigate = useNavigate();

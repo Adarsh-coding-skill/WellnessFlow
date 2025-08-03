@@ -4,7 +4,7 @@ import SessionCard from "../Session/SessionCard.jsx";
 import { Typography, Box } from "@mui/material";
 import toast from "react-hot-toast";
 import "../../CSS/session.css"
-
+  import '../../App.css';
 const Draft = () => {
   const [sessions, setSessions] = useState([]);
 

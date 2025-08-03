@@ -100,3 +100,11 @@ h2 {
 .redirect-Link{
     margin-top: 25px;
 }
+
+@media screen and (max-width: 450px){
+  .Box-container{
+    margin-left: 11%;
+    width: 325px;
+    height: 425px;
+  }
+}

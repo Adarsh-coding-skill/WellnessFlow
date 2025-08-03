@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SessionCard from "../Session/SessionCard";
   import "../../CSS/Session.css";
+  import '../../App.css';
   
 const MySessions = () => {
   const [sessions, setSessions] = useState([]);

@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
-import { Context } from "../Context/UserContext";
+import { Context } from "../../component/Context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-
 import {
   AppBar,
   Toolbar,
@@ -18,12 +17,12 @@ import {
   Divider,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import SpaIcon from "@mui/icons-material/Spa"; // Wellness-like icon
+  import '../../App.css';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { isAuthorized, setIsAuthorized, user } = useContext(Context);
-  const navigateTo = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
@@ -32,121 +31,104 @@ const Navbar = () => {
       });
       toast.success(res.data.message);
       setIsAuthorized(false);
-      navigateTo("/");
+      navigate("/");
     } catch (err) {
       toast.error(err?.response?.data?.message || "Logout failed");
+      setIsAuthorized(false);
     }
   };
 
   const menuItems = [
-    { text: "HOME", path: "/" },
-    { text: "My Sessions", path: "/my-sessions" },
-    { text: "New Session", path: "/editor" }, // Editor route
+    { text: "DASHBOARD", path: "/dashboard" },
+    { text: "MY SESSIONS", path: "/my-sessions" },
+    { text: "DRAFTS", path: "/my-sessions/drafts" },
+    { text: "PUBLISHED", path: "/my-sessions/published" },
+    { text: "CREATE", path: "/editor" },
   ];
 
-  
-
   return (
-    <>
-   <AppBar
+    <AppBar
       position="static"
       sx={{
         bgcolor: "#11101d",
         boxShadow: "0 4px 12px rgba(255, 0, 150, 0.4)",
       }}
     >
+ 
       <Toolbar>
-        {/* Logo */}
-        <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
-          <Link to="/dashboard" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-            <SpaIcon sx={{ color: "#C165FF", fontSize: 32, mr: 1 }} />
-            <Typography variant="h6" sx={{ color: "#C165FF", fontWeight: 600 }}>
-              WellnessFlow
-            </Typography>
+        <Box sx={{ flexGrow: 1 }}>
+          <Link>  <Typography variant="h6" sx={{color: "#c166ff",fontWeight: 600}}>WellnessFlow
+          </Typography>
           </Link>
         </Box>
 
-        {/* Desktop Menu */}
         {isAuthorized && (
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-            {menuItems.map((item, index) => (
+          <>
+            {/* Desktop View */}
+            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+              {menuItems.map((item, index) => (
+                <Button
+                  key={index}
+                  component={Link}
+                  to={item.path}
+                  sx={{
+                    color: "#fff",
+                    fontWeight: 500,
+                    "&:hover": { color: "#f72585" },
+                  }}
+                >
+                  {item.text}
+                </Button>
+              ))}
               <Button
-                key={index}
-                component={Link}
-                to={item.path}
+                onClick={handleLogout}
                 sx={{
-                  color: "#fff",
-                  fontWeight: 500,
-                  "&:hover": { color: "#C165FF" },
+                  color: "#f72585",
+                  fontWeight: 600,
                 }}
               >
-                {item.text}
+                LOGOUT
               </Button>
-            ))}
-            <Button
-              onClick={handleLogout}
-              sx={{
-                color: "#f72585",
-                fontWeight: 600,
-                "&:hover": { color: "#ff4081" },
-              }}
-            >
-              LOGOUT
-            </Button>
-          </Box>
-        )}
+            </Box>
 
-        {/* Mobile Menu Icon */}
-        {isAuthorized && (
-          <IconButton
-            edge="end"
-            sx={{ display: { md: "none" }, color: "#fff" }}
-            onClick={() => setOpen(true)}
-          >
-            <MenuIcon />
-          </IconButton>
+            {/* Mobile Menu Button */}
+            <IconButton
+              edge="end"
+              sx={{ display: { md: "none" }, color: "#fff" }}
+              onClick={() => setOpen(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+          </>
         )}
       </Toolbar>
 
-      {/* Mobile Drawer */}
+      {/* Drawer Menu */}
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
         <Box
-          width={260}
-          sx={{ bgcolor: "#1e1e2f", height: "100%", color: "#fff" }}
+          sx={{ width: 250, bgcolor: "#1e1e2f", height: "100%", color: "#fff" }}
           onClick={() => setOpen(false)}
         >
           <Box sx={{ px: 2, py: 2 }}>
             <Typography variant="h6" sx={{ fontWeight: 600 }}>
               Menu
             </Typography>
-            <Divider sx={{ borderColor: "#444", my: 1 }} />
+            <Divider sx={{ borderColor: "#444" }} />
           </Box>
           <List>
             {menuItems.map((item, index) => (
-              <ListItem button component={Link} to={item.path} key={index}>
-                <ListItemText
-                  primary={item.text}
-                  primaryTypographyProps={{ fontSize: 16, fontWeight: 500 }}
-                />
+              <ListItem button key={index} component={Link} to={item.path}>
+                <ListItemText primary={item.text} />
               </ListItem>
             ))}
             <ListItem button onClick={handleLogout}>
-              <ListItemText
-                primary="LOGOUT"
-                primaryTypographyProps={{
-                  fontSize: 16,
-                  fontWeight: 600,
-                  color: "#f72585",
-                }}
-              />
+              <ListItemText primary="LOGOUT" sx={{ color: "#f72585" }} />
             </ListItem>
           </List>
         </Box>
       </Drawer>
     </AppBar>
-    </>
   );
 };
-
 
 export default Navbar;

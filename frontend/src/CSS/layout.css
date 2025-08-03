@@ -81,11 +81,10 @@ button:hover {
 
 .hamburger {
   display: none;
-  font-size: 1.5rem;
-  color: #fff;
+  font-size: 2rem;
+  color: white;
   cursor: pointer;
 }
-
 /* Responsive */
 
 @media screen and (max-width: 768px) {
