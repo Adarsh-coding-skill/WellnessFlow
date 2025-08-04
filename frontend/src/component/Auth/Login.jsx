@@ -9,12 +9,16 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import InputAdornment from '@mui/material/InputAdornment';
+import { RiLock2Fill } from "react-icons/ri";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../../CSS/Auth.css"
   import '../../App.css';
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
   const { isAuthorized, setIsAuthorized } = useContext(Context);
 
   const handleLogin = async (e) => {
@@ -57,12 +61,18 @@ const Login = () => {
             variant="standard" required />
           <TextField
           className="Text-input"
-            type="password"
+            type={showPassword ? "text" : "password"}
             label="Password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            variant="standard" required />
+            variant="standard" required />     <span
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="eye"
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </span>
+      
             <Stack direction="row" spacing={2}>
           <Button className="button-signup" type="submit">Login</Button>
           </Stack>

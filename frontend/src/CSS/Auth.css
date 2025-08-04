@@ -101,10 +101,32 @@ h2 {
     margin-top: 25px;
 }
 
+.eye{
+      position: absolute;
+    top: 46%;
+    right: 34%;
+}
+.eye-R{
+  
+      position: absolute;
+    top: 51%;
+    right: 34%;
+}
 @media screen and (max-width: 450px){
   .Box-container{
     margin-left: 11%;
     width: 325px;
     height: 425px;
   }
+  .eye {
+    position: absolute;
+    top: 50.5%;
+    right: 25%;
+}
+
+
+.eye-R{
+      top: 56%;
+    right: 26%;
+}
 }
