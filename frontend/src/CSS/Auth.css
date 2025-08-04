@@ -104,13 +104,13 @@ h2 {
 .eye{
       position: absolute;
     top: 46%;
-    right: 34%;
+    right: 39%;
 }
 .eye-R{
   
       position: absolute;
-    top: 51%;
-    right: 34%;
+       top: 51.5%;
+    right: 39%;
 }
 @media screen and (max-width: 450px){
   .Box-container{
